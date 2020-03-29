@@ -2,12 +2,14 @@
 #define PROCESS_H
 
 #include <string>
+#include "linux_parser.h"
 /*
 Basic class for Process representation
 It contains relevant attributes as shown below
 */
 class Process {
  public:
+  //Process (int pid): m_pid(pid) {};
   int Pid();                               // TODO: See src/process.cpp
   std::string User();                      // TODO: See src/process.cpp
   std::string Command();                   // TODO: See src/process.cpp
@@ -15,9 +17,12 @@ class Process {
   std::string Ram();                       // TODO: See src/process.cpp
   long int UpTime();                       // TODO: See src/process.cpp
   bool operator<(Process const& a) const;  // TODO: See src/process.cpp
-
+  void set_pid(int pid){
+      m_pid = pid;
+  }
   // TODO: Declare any necessary private members
  private:
+ int m_pid;
 };
 
 #endif

@@ -104,8 +104,6 @@ float LinuxParser::MemoryUtilization() {
         }
       }
     }
-    
-    
   }
   
   return (MemTotal-MemFree - MemAvailable - Buffers) / MemTotal *1.0;
@@ -160,11 +158,12 @@ int LinuxParser::TotalProcesses() {
       }
     }
   }
-  return 5;
+  return Pids().size();
   }
 
 // TODO: Read and return the number of running processes
-int LinuxParser::RunningProcesses() { string line;
+int LinuxParser::RunningProcesses() { 
+  string line;
   string key;
   string value;
   std::ifstream filestream(kProcDirectory + kStatFilename);
@@ -184,7 +183,21 @@ int LinuxParser::RunningProcesses() { string line;
 
 // TODO: Read and return the command associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Command(int pid[[maybe_unused]]) { return string(); }
+string LinuxParser::Command(int pid) { 
+  
+   string os, kernel;
+  string line;
+  std::ifstream stream(kProcDirectory + std::to_string(pid) + kCmdlineFilename);
+  if (stream.is_open()) {
+    std::getline(stream, line);
+    return line;
+  }
+ 
+  
+  
+  
+  
+  }
 
 // TODO: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
